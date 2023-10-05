@@ -49,9 +49,33 @@ func main() {
 			// 收入  1100   1000  有人發紅包
 			details += fmt.Sprintf("\n收入\t%v\t%v\t%v", balance, money, note)
 		case "3":
-			fmt.Println("登記支出..")
+			fmt.Println("本次支出金額：")
+			fmt.Scan(&money)
+			// 條件判斷
+			if money > balance {
+				fmt.Println("餘額金額不足")
+				break
+			}
+			balance -= money
+			fmt.Println("本次支出說明：")
+			fmt.Scan(&note)
+			details += fmt.Sprintf("\n支出\t%v\t%v\t%v", balance, money, note)
+
 		case "4":
-			loop = false
+			fmt.Println("是否確定要退出？（Y/N）")
+			choice := ""
+			for {
+				fmt.Scan(&choice)
+				if choice == "Y" || choice == "N" {
+					break
+				}
+				fmt.Println("你的輸入有誤，請重新輸入 Y/N")
+			}
+
+			if choice == "Y" {
+				loop = false
+			}
+
 		default:
 			fmt.Println("請輸入正確的選項..")
 		}
