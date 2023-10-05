@@ -19,6 +19,10 @@ func main() {
 	// 每次收支說明
 	note := ""
 
+	// 定義一個變量，紀錄是否有收支的行為
+	// 預設初始化情況下，無收之行為
+	flag := false
+
 	// 收支的詳情用字符串紀錄
 	// 當有收支時，只需要對details 進行拼接處理即可
 	details := "收支\t帳戶金額\t收支金額\t說明"
@@ -37,7 +41,12 @@ func main() {
 		switch key {
 		case "1":
 			fmt.Println("------------當前收支明細------------")
-			fmt.Println(details)
+			if flag {
+				fmt.Println(details)
+			} else {
+				fmt.Println("目前沒有收支，請來一筆！")
+			}
+
 		case "2":
 			fmt.Println("本次收入金額：")
 			fmt.Scan(&money)
@@ -48,6 +57,8 @@ func main() {
 			// 將收入情況拼接到 details 變量
 			// 收入  1100   1000  有人發紅包
 			details += fmt.Sprintf("\n收入\t%v\t%v\t%v", balance, money, note)
+			flag = true
+
 		case "3":
 			fmt.Println("本次支出金額：")
 			fmt.Scan(&money)
@@ -60,6 +71,7 @@ func main() {
 			fmt.Println("本次支出說明：")
 			fmt.Scan(&note)
 			details += fmt.Sprintf("\n支出\t%v\t%v\t%v", balance, money, note)
+			flag = true
 
 		case "4":
 			fmt.Println("是否確定要退出？（Y/N）")
